@@ -12,6 +12,7 @@ dependencies = [
 
 [project.scripts]
 runtime = "runtime.__main__:repl"
+research = "research.__main__:demo"
 
 [build-system]
 requires = ["hatchling"]
