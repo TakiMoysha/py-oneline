@@ -1,6 +1,5 @@
 from typing import Literal
 
-
 type InputSegments = Literal["numbers", "names", "instructions"]
 type Input = dict[InputSegments, str]
 
@@ -56,4 +55,5 @@ def parser_string(string: str) -> Input: ...
 
 
 if __name__ == "__main__":
-    Interpreter().execute("7 + 5")
+    pass
+    # Interpreter().execute("7 + 5")

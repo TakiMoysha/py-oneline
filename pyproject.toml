@@ -6,22 +6,25 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "argparse>=1.4.0",
-    "structlog>=24.4.0",
+  "argparse>=1.4.0",
+  "rich>=13.9.4",
+  "structlog>=24.4.0",
+  "textual>=1.0.0",
 ]
 
 [project.scripts]
-runtime = "runtime.__main__:repl"
-research = "research.__main__:demo"
+repl = "runtime.__main__:repl"
+execute = "runtime.__main__:execute"
+disearch = "disearch.__main__:demo"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build]
-dev-mode-dirs = ["src/"]
 include = []
-packages = ["src/runtime"]
+dev-mode-dirs = ["src/"]
+packages = ["src/runtime", "src/disearch"]
 
 [tool.uv]
 default-groups = ["dev", "docs", "linting", "test"]

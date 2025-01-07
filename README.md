@@ -1,3 +1,7 @@
+## DiSearcher
+
+TUI App for dissambling Python bytecode. Input in left panel, output in right panel.
+
 ## Work Log
 
 Lexing, parsing and compiling.
