@@ -18,10 +18,18 @@ def fn_infinite_loop():
         print(1)
 
 
-def demo():
+def demo_dis():
     print(dis.dis(fn_zero))
     print("=========================================")
     print(dis.dis(fn_loop))
     print("=========================================")
     print(dis.dis(fn_infinite_loop))
     print("=========================================")
+
+
+
+from .cli import cli_app
+
+
+def demo():
+    cli_app()
