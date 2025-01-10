@@ -2,14 +2,40 @@
 
 TUI App for dissambling Python bytecode. Input in left panel, output in right panel.
 
-## Work Log
+- [ ] GUI:
+  - [ ] 2 Layers: Input buffer and disassembly
+
+## Byterun
 
 Lexing, parsing and compiling.
 
-**Context.** Python interpreter is a _virtual machine_. Particular virtual machine is a stack machine. PyVM is a _bytecode interpreter_.
+**Context:** Python interpreter is a _virtual machine_. Particular virtual machine is a stack machine. PyVM is a _bytecode interpreter_.
+
+**Mistake Global Stack:** Вместо одного стека для каждго кадра был только один стек данных во всей машине. В CPython тщательно очищают стек, и кадры использовали один и тот же стек, не имел значения. Когда bar завершает выполнение, его стек данных остается пустым. Однако ключевой особенностью генераторов является возможность приостановить кадр, вернуться к другому кадру, а затем вернуться к кадру генератора позже и оставить его точно в том же состоянии, в котором его оставили.
+
+Класс VirtualMachine, который управляет структурой самого высокого уровня, в частности стеком вызовов кадров, и содержит сопоставление инструкций с операциями. Это более сложная версия объекта Intepreter, представленного выше.
+Класс фрейма. Каждый экземпляр Frame имеет один объект кода и управляет несколькими другими необходимыми битами состояния, в частности глобальным и локальным пространствами имен, ссылкой на вызывающий кадр и последней выполненной инструкцией байт-кода.
+Класс Function, который будет использоваться вместо реальных функций Python. Напомним, что вызов функции создает в интерпретаторе новый кадр. Мы реализуем функцию, чтобы контролировать создание новых фреймов.
+Класс Block, который просто обертывает три атрибута блоков. (Детали блоков не имеют решающего значения для интерпретатора Python, поэтому мы не будем тратить на них много времени, но они включены сюда для того, чтобы Byterun мог выполнять реальный код Python.)
+
+```
+  +---------------------+
+  |     Call Stack      |
+  +---------------------+          +----------------------+
+  | bar Frame (newest)  |          |  Block Stack: []     |
+  |                     |          |  Data  Stack: [2, 3] |
+  +---------------------+          +----------------------+
+  |      foo Frame      |          |  Block stack: []     |
+  |                     |          |  Data  stack: [1]    |
+  +---------------------+          +----------------------+
+  | main (module) Frame |          |  Block stack: []     |
+  |     (oldest)        |          |  Data  stack: []     |
+  +---------------------+          +----------------------+
+```
 
 ## References
 
 1. [ForceBru / PyVM / github.com](https://github.com/ForceBru/PyVM)
 2. [Nedbat / byterun / github.com](https://github.com/nedbat/byterun)
-3.
+3. [Textual Guide / textual.textualize.io](https://textual.textualize.io/guide)
+4.

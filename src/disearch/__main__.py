@@ -1,5 +1,7 @@
 import dis
 
+from .cli import cli_app
+
 
 def fn_zero():
     x = 3
@@ -27,9 +29,5 @@ def demo_dis():
     print("=========================================")
 
 
-
-from .cli import cli_app
-
-
-def demo():
+if __name__ == "__main__":
     cli_app()

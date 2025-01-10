@@ -1,5 +1,5 @@
 [project]
-name = "taki-python"
+name = "taki_python"
 version = "0.1.0"
 authors = [{ name = "TakiMoysha", email = "mpwema782@gmail.com" }]
 description = "Add your description here"
@@ -15,7 +15,7 @@ dependencies = [
 [project.scripts]
 repl = "runtime.__main__:repl"
 execute = "runtime.__main__:execute"
-disearch = "disearch.__main__:demo"
+disearch = "disearch.__main__:cli_app"
 
 [build-system]
 requires = ["hatchling"]

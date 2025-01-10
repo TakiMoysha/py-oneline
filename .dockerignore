@@ -1,0 +1,11 @@
+.git
+venv
+deploy
+tests
+tmp
+.gitignore
+.pre-commit-config.yaml
+README.md
+justfile
+.DS_Store
+**/__pycache__
